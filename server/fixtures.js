@@ -360,11 +360,7 @@ if (Items.find().count() === 0) {
   });
 
   Items.insert({
-    title: 'Saffron Ice Cream'
-}
-];
-Template.itemsList.helpers({
-items: itemsData
-});
-
+    title: 'Saffron Ice Cream',
+	score:0
+  });
 }
