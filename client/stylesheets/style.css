@@ -9,6 +9,12 @@ body {
     background: #eee;
     color: #666666;
 }
+
+.btn-group-wrap {
+    text-align: center;
+	padding: 100px;
+}
+
 .navbar { margin-bottom: 10px }
 .navbar .navbar-inner {
     border-radius: 0px 0px 3px 3px;

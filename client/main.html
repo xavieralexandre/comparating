@@ -5,10 +5,16 @@
   <div class="container">
     <header class="navbar">
       <div class="navbar-inner">
-        <a class="brand" href="/">Comparating</a>
+        <a class="brand" href="/">Comparating Ice-creams flavors</a>
       </div>
     </header>
     <div id="main" class="row-fluid">
+		<div class="btn-group-wrap">
+		<div class="btn-group">
+		  <button class="btn">{{> randomItem}}</button>
+		  <button class="btn">{{> randomItem}}</button>
+		</div>
+		</div>
       {{> itemsList}}
     </div>
   </div>
