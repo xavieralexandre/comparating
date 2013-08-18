@@ -1,5 +1,5 @@
 Template.randomItem.helpers({
-  items: function() {
-    return Items.findOne({score: 0});
+  item: function() {
+    return Items.find();
   }
 });
