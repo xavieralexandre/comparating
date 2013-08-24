@@ -7,35 +7,42 @@ function getRandomInt(min, max) {
 
 
 if (Meteor.isClient) {
-  Meteor.subscribe('items');
+  Meteor.subscribe('items', function() {
+    console.log ("Subscription READY");
 
-  Template.comparating.items = function () {
-    return Items.find({}, {sort: {name: 1}});
-  };
-
-  Template.comparating.versus_items = function () {
     var itemsCount = Items.find().count();
     var firstItemPosition = getRandomInt(0, itemsCount);
     var secondItemPosition = getRandomInt(0, itemsCount);
 
-    console.log('BEFORE: firstItemPosition:', firstItemPosition, " secondItemPosition:", secondItemPosition);
-
-    // TODO: Does not work ! Stalls the browser
-    var i = 0;
     while (secondItemPosition === firstItemPosition) {
-      console.log('firstItemPosition:', firstItemPosition, " secondItemPosition:", secondItemPosition);
       secondItemPosition = getRandomInt(0, itemsCount);
-      i = i + 1;
-      if (i === 10) {
-        break;
-      }
     }
 
     var firstItem = Items.findOne({}, {skip: firstItemPosition});
     var secondItem = Items.findOne({}, {skip: secondItemPosition});
-    return [firstItem, secondItem];
-  };
 
+    var versusItems = [firstItem, secondItem];
+
+    // TODO: Live reload versus items on each click
+
+    var buttonsFragment = Meteor.render(function () {
+      var html = "";
+
+      for (var i = 0; i < versusItems.length; i++) {
+        var versusItem = versusItems[i];
+        html += '<li class="versus_item"><input type="button" data-id="' + versusItem._id  + '" value="' + versusItem.name + '"></li>';
+      }
+
+      return html;
+    });
+
+    jQuery('ul.versus').html(buttonsFragment);
+
+  });
+
+  Template.comparating.items = function () {
+    return Items.find({}, {sort: {name: 1}});
+  };
 
   // TODO: give 1 point to the clicked item, remove 1 point to the other one
 
