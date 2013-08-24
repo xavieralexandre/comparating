@@ -1,0 +1,37 @@
+<head>
+  <title>Comparating</title>
+</head>
+
+<body>
+<div id="outer">
+  {{> comparating}}
+</div>
+</body>
+
+<template name="comparating">
+  <ul class="versus">
+    {{#each versus_items}}
+    {{> versus_item}}
+    {{/each}}
+  </ul>
+
+  <div class="items_list">
+    {{#each items}}
+    {{> item}}
+    {{/each}}
+  </div>
+
+</template>
+
+<template name="item">
+  <div class="item">
+    <span class="name">{{name}}</span>
+    <span class="score">{{score}}</span>
+  </div>
+</template>
+
+<template name="versus_item">
+  <li class="versus_item">
+    <input type="button" data-id="{{_id}}" value="{{name}}">
+  </li>
+</template>
