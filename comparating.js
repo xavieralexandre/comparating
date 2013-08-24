@@ -1,8 +1,36 @@
 Items = new Meteor.Collection("items");
 
-function getRandomInt(min, max) {
-  return Math.floor(Math.random() * (max - min + 1) + min);
-}
+
+// namespace for all business logic
+var CR = {
+  getRandomInt: function (min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
+  },
+
+  volatilityCoefficient: function(item) {
+    if (item.gamesCount <= 30) {
+      return 30;
+    }
+    else if (item.gamesCount > 30 && item.score < 2400) {
+      return 15;
+    }
+    else {
+      return 10;
+    }
+  },
+
+  winningProbability: function(firstItem, secondItem) {
+    var scoreDistance = firstItem.score - secondItem.score;
+    return 1 / (1 + Math.pow(10, -scoreDistance/400));
+  },
+
+  // didWin: int (0 or 1)
+  newScore: function(firstItem, didWin, secondItem) {
+    return Math.round(firstItem.score + CR.volatilityCoefficient(firstItem) * (didWin - CR.winningProbability(firstItem, secondItem)));
+  }
+
+};
+
 
 
 
@@ -12,11 +40,11 @@ if (Meteor.isClient) {
 
     var buttonsFragment = Meteor.render(function () {
       var itemsCount = Items.find().count();
-      var firstItemPosition = getRandomInt(0, itemsCount);
-      var secondItemPosition = getRandomInt(0, itemsCount);
+      var firstItemPosition = CR.getRandomInt(0, itemsCount);
+      var secondItemPosition = CR.getRandomInt(0, itemsCount);
 
       while (secondItemPosition === firstItemPosition) {
-        secondItemPosition = getRandomInt(0, itemsCount);
+        secondItemPosition = CR.getRandomInt(0, itemsCount);
       }
 
       var firstItem = Items.findOne({}, {skip: firstItemPosition});
@@ -42,22 +70,28 @@ if (Meteor.isClient) {
     return Items.find({}, {sort: {name: 1}});
   };
 
-  // TODO: give 1 point to the clicked item, remove 1 point to the other one
-
   Template.comparating.events({
     'click input': function (e) {
       e.preventDefault();
       var target = jQuery(e.currentTarget);
       var loser = target.parent().siblings().find('input');
 
-      console.log("target", target);
-      console.log("I should give one point to ", target.data('id'));
-      console.log("I should give take back one point from ", loser.data('id'));
+      var winnerId = target.data('id');
+      var loserId = loser.data('id');
 
-      Items.update(target.data('id'), {$inc: {score: 1}})
-      Items.update(loser.data('id'), {$inc: {score: -1}})
+      // Elo Rating
+      var winnerItem = Items.findOne(winnerId);
+      var loserItem = Items.findOne(loserId);
 
-      //Players.update(Session.get("selected_player"), {$inc: {score: 5}});
+      var winnerItemNewScore = CR.newScore(winnerItem, 1, loserItem);
+      var loserItemNewScore = CR.newScore(loserItem, 0, winnerItem);
+
+      Items.update(winnerId, {$set: {score: winnerItemNewScore}, $inc: {gamesCount: 1}});
+      Items.update(loserId, {$set: {score: loserItemNewScore}, $inc: {gamesCount: 1}});
+
+      // NAIVE RATING
+      //Items.update(target.data('id'), {$inc: {score: 1}})
+      //Items.update(loser.data('id'), {$inc: {score: -1}})
     }
   });
 
@@ -144,7 +178,7 @@ if (Meteor.isServer) {
         "Black Pepper Ice Cream",
         "Saffron Ice Cream"];
       for (var i = 0; i < names.length; i++)
-        Items.insert({name: names[i], score: 0});
+        Items.insert({name: names[i], score: 1400, gamesCount: 0});
     }
 
     Meteor.publish('items', function() {
