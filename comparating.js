@@ -10,22 +10,20 @@ if (Meteor.isClient) {
   Meteor.subscribe('items', function() {
     console.log ("Subscription READY");
 
-    var itemsCount = Items.find().count();
-    var firstItemPosition = getRandomInt(0, itemsCount);
-    var secondItemPosition = getRandomInt(0, itemsCount);
-
-    while (secondItemPosition === firstItemPosition) {
-      secondItemPosition = getRandomInt(0, itemsCount);
-    }
-
-    var firstItem = Items.findOne({}, {skip: firstItemPosition});
-    var secondItem = Items.findOne({}, {skip: secondItemPosition});
-
-    var versusItems = [firstItem, secondItem];
-
-    // TODO: Live reload versus items on each click
-
     var buttonsFragment = Meteor.render(function () {
+      var itemsCount = Items.find().count();
+      var firstItemPosition = getRandomInt(0, itemsCount);
+      var secondItemPosition = getRandomInt(0, itemsCount);
+
+      while (secondItemPosition === firstItemPosition) {
+        secondItemPosition = getRandomInt(0, itemsCount);
+      }
+
+      var firstItem = Items.findOne({}, {skip: firstItemPosition});
+      var secondItem = Items.findOne({}, {skip: secondItemPosition});
+
+      var versusItems = [firstItem, secondItem];
+
       var html = "";
 
       for (var i = 0; i < versusItems.length; i++) {
