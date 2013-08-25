@@ -9,6 +9,9 @@ body {
     -o-user-select: none;
     user-select: none;
 }
+h2{
+	text-align:center;
+}
 
 .versus{
 	list-style-type: none;
