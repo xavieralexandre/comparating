@@ -74,7 +74,7 @@ Meteor.startup(function () {
       "Parsley Ice Cream",
       "Black Pepper Ice Cream",
       "Saffron Ice Cream"];
-    for (var i = 0; i < names.length; i++) {
+    for (var i = 0; i < 25; i++) {
       Items.insert({name: names[i], score: 1400, gamesCount: 0});
     }
   }
