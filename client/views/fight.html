@@ -1,0 +1,13 @@
+<template name="fight">
+  <ul class="versus">
+    {{#each versus_items}}
+    {{> versus_item}}
+    {{/each}}
+  </ul>
+</template>
+
+<template name="versus_item">
+  <li class="versus_item">
+    <input type="button" data-id="{{_id}}" value="{{name}}">
+  </li>
+</template>

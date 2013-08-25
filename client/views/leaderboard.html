@@ -1,0 +1,14 @@
+<template name="leaderboard">
+  <div class="items_list">
+    {{#each items}}
+    {{> item}}
+    {{/each}}
+  </div>
+</template>
+
+<template name="item">
+  <div class="item">
+    <span class="name">{{name}}</span>
+    <span class="score">{{score}}</span>
+  </div>
+</template>

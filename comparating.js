@@ -66,11 +66,11 @@ if (Meteor.isClient) {
 
   });
 
-  Template.comparating.items = function () {
+  Template.leaderboard.items = function () {
     return Items.find({}, {sort: {name: 1}});
   };
 
-  Template.comparating.events({
+  Template.fight.events({
     'click input': function (e) {
       e.preventDefault();
       var target = jQuery(e.currentTarget);
