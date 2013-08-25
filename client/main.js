@@ -30,7 +30,7 @@ Meteor.subscribe('items', function() {
 });
 
 Template.leaderboard.items = function () {
-  return Items.find({}, {sort: {name: 1}});
+  return Items.find({}, {sort: {score: -1}});
 };
 
 Template.fight.events({
