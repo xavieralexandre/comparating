@@ -20,18 +20,18 @@ refreshButtons = function() {
 
   for (var i = 0; i < versusItems.length; i++) {
     var versusItem = versusItems[i];
-    html += '<li class="versus_item"><input type="button" data-id="' + versusItem._id  + '" value="' + versusItem.name + '"></li>';
+    html += '<li class="versus_item"><button type="button" class="btn btn-primary btn-lg" data-id="' + versusItem._id  + '">' + versusItem.name + '</button></li>';
   }
 
   jQuery('ul.versus').html(html);
 };
 
 
-Template.fight.events({
-  'click input': function (e) {
+Template.fight.rendered = function () {
+  jQuery('.container').on('click', 'button', function(e) {
     e.preventDefault();
     var target = jQuery(e.currentTarget);
-    var loser = target.parent().siblings().find('input');
+    var loser = target.parent().siblings().find('button');
 
     var winnerId = target.data('id');
     var loserId = loser.data('id');
@@ -51,5 +51,5 @@ Template.fight.events({
     // NAIVE RATING
     //Items.update(target.data('id'), {$inc: {score: 1}})
     //Items.update(loser.data('id'), {$inc: {score: -1}})
-  }
-});
+  });
+}
