@@ -54,7 +54,7 @@ CR.seed = function () {
     "Sésame noir",
     "Eau de rose",
     "Fleur d’oranger"];
-  for (var i = 0; i < 25; i++) {
+  for (var i = 0; i < names.length; i++) {
     Items.insert({name: names[i], score: 1400, gamesCount: 0});
   }
 }
