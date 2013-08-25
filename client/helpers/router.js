@@ -5,3 +5,7 @@ Meteor.Router.add({
 Meteor.Router.add({
   '/leaderboard': 'leaderboard'
 });
+
+Meteor.Router.add({
+  '/admin': 'admin'
+});
