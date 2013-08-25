@@ -2,7 +2,7 @@ var pickRandomRank = function(itemsCount) {
   return CR.getRandomInt(0, itemsCount - 1);
 }
 
-refreshButtons = function() {
+CR.refreshButtons = function() {
   var itemsCount = Items.find().count();
   var firstItemPosition = pickRandomRank(itemsCount);
   var secondItemPosition = pickRandomRank(itemsCount);
@@ -11,10 +11,10 @@ refreshButtons = function() {
     secondItemPosition = pickRandomRank(itemsCount);
   }
 
-  var firstItem = Items.findOne({}, {skip: firstItemPosition});
-  var secondItem = Items.findOne({}, {skip: secondItemPosition});
+  CR.firstItem = Items.findOne({}, {skip: firstItemPosition});
+  CR.secondItem = Items.findOne({}, {skip: secondItemPosition});
 
-  var versusItems = [firstItem, secondItem];
+  var versusItems = [CR.firstItem, CR.secondItem];
 
   var html = "";
 
@@ -46,7 +46,7 @@ Template.fight.rendered = function () {
     Items.update(winnerId, {$set: {score: winnerItemNewScore}, $inc: {gamesCount: 1}});
     Items.update(loserId, {$set: {score: loserItemNewScore}, $inc: {gamesCount: 1}});
 
-    refreshButtons();
+    CR.refreshButtons();
 
     // NAIVE RATING
     //Items.update(target.data('id'), {$inc: {score: 1}})
