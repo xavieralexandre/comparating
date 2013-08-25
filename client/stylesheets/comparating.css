@@ -24,6 +24,11 @@ h2{
 	width: 50%;	
 }
 
+.btn_admin_centered {
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
 .btn_big {
 	width:90%;
 	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
