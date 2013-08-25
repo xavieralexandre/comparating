@@ -9,11 +9,21 @@ body {
     -o-user-select: none;
     user-select: none;
 	line-height: auto;
-    font-size: 1em;
+    font-size: .5em;
 }
 h2{
 	text-align:center;
 }
+
+.items_list{
+	-moz-column-count:2; /* Firefox */
+	-webkit-column-count:2; /* Safari and Chrome */
+	column-count:2;
+	-moz-column-fill: balance;
+	-webkit-column-fill: balance;
+	column-fill: balance;
+}
+
 
 .versus{
 	list-style-type: none;
@@ -79,12 +89,6 @@ h2{
 .item {
     cursor: pointer;
     padding: 5px;
-	-moz-column-count:2; /* Firefox */
-	-webkit-column-count:2; /* Safari and Chrome */
-	column-count:2;
-	-moz-column-fill: balance;
-	-webkit-column-fill: balance;
-	column-fill: balance;
 }
 
 .item .name {
