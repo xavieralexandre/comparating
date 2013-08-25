@@ -1,29 +1,37 @@
 body {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-weight: 200;
-    margin: 0;
-    padding: 0;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -o-user-select: none;
-    user-select: none;
-    line-height: auto;
-    font-size: .5em;
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-weight: 200;
+	margin: 0;
+	padding: 0;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-o-user-select: none;
+	user-select: none;
+	line-height: auto;
+	font-size: .5em;
+}
+
+nav{
+	list-style: none;
+	position:absolute;
+	top:0;
+	left:0;
+	padding:1em;
 }
 
 h2{
-    text-align:center;
-    font-size: 4em;
+	text-align:center;
+	font-size: 4em;
 	
 	margin: 1em;
 }
 
 .btn-full{
 	display:block;
-    position: absolute;
-    bottom: 0;
-    height: 80%;
+	position: absolute;
+	bottom: 0;
+	height: 80%;
 	width: 45%;
 }
 
@@ -36,62 +44,62 @@ li.versus_item:last-child button{
 }
 
 .items_list{
-    -moz-column-count:2; /* Firefox */
-    -webkit-column-count:2; /* Safari and Chrome */
-    column-count:2;
-    -moz-column-fill: balance;
-    -webkit-column-fill: balance;
-    column-fill: balance;
+	-moz-column-count:2; /* Firefox */
+	-webkit-column-count:2; /* Safari and Chrome */
+	column-count:2;
+	-moz-column-fill: balance;
+	-webkit-column-fill: balance;
+	column-fill: balance;
 }
 
 
 .versus{
-    list-style-type: none;
-    text-align: center;
-    margin: auto 0 auto 0;
+	list-style-type: none;
+	text-align: center;
+	margin: auto 0 auto 0;
 }
 
 .versus_item{
-    display: inline-block;
-    width: 40%;
+	display: inline-block;
+	width: 40%;
 	margin: 5%;
 }
 
 #outer {
-    margin: 10%;
+	margin: 10%;
 }
 
 .item {
-    cursor: pointer;
-    padding: 5px;
+	cursor: pointer;
+	padding: 5px;
 }
 
 .item .name {
-    display: inline-block;
-    width: 50%;
+	display: inline-block;
+	width: 50%;
 }
 
 .item .score {
-    display: inline-block;
-    text-align: right;
-    font-weight: bold;
-    color: #777;
+	display: inline-block;
+	text-align: right;
+	font-weight: bold;
+	color: #777;
 }
 
 .details, .none {
-    font-weight: bold;
-    font-size: 2em;
-    border-style: dashed none none none;
-    border-color: #ccc;
-    border-width: 4px;
-    margin: 50px 10px;
-    padding: 10px 0px;
+	font-weight: bold;
+	font-size: 2em;
+	border-style: dashed none none none;
+	border-color: #ccc;
+	border-width: 4px;
+	margin: 50px 10px;
+	padding: 10px 0px;
 }
 
 .none {
-    color: #777;
+	color: #777;
 }
 
 .inc {
-    cursor: pointer;
+	cursor: pointer;
 }
