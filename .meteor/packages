@@ -5,6 +5,5 @@
 
 insecure
 preserve-inputs
-bootstrap
 standard-app-packages
 router
