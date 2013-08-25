@@ -34,7 +34,8 @@ h2{
 
 .versus_item{
     display: inline-block;
-    width: 50%;
+    width: 40%;
+	margin: 5%;
 }
 
 .versus_item input[type=button]{

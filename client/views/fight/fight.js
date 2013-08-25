@@ -20,7 +20,7 @@ CR.refreshButtons = function() {
 
   for (var i = 0; i < versusItems.length; i++) {
     var versusItem = versusItems[i];
-    html += '<li class="versus_item"><button type="button" class="btn btn-primary btn-lg" data-id="' + versusItem._id  + '">' + versusItem.name + '</button></li>';
+    html += '<li class="versus_item"><button type="button" class="btn btn-primary btn-lg btn-block" data-id="' + versusItem._id  + '">' + versusItem.name + '</button></li>';
   }
 
   jQuery('ul.versus').html(html);
