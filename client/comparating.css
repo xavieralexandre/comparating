@@ -13,6 +13,7 @@ body {
 }
 h2{
 	text-align:center;
+    font-size: 4em;
 }
 
 .items_list{
@@ -62,11 +63,11 @@ h2{
 	display:inline-block;
 	color:#777777;
 	font-family:arial;
-	font-size:15px;
+	font-size:2em;
 	font-weight:bold;
 	font-style:normal;
-	height:50px;
-	line-height:50px;
+	height:4em;
+	line-height:4em;
 	text-decoration:none;
 	text-align:center;
 	text-shadow:1px 1px 0px #ffffff;
