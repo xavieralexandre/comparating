@@ -1,32 +1,35 @@
+var pickRandomRank = function(itemsCount) {
+  return CR.getRandomInt(0, itemsCount - 1);
+}
+
+var refreshButtons = function() {
+  var itemsCount = Items.find().count();
+  var firstItemPosition = pickRandomRank(itemsCount);
+  var secondItemPosition = pickRandomRank(itemsCount);
+
+  while (secondItemPosition === firstItemPosition) {
+    secondItemPosition = pickRandomRank(itemsCount);
+  }
+
+  var firstItem = Items.findOne({}, {skip: firstItemPosition});
+  var secondItem = Items.findOne({}, {skip: secondItemPosition});
+
+  var versusItems = [firstItem, secondItem];
+
+  var html = "";
+
+  for (var i = 0; i < versusItems.length; i++) {
+    var versusItem = versusItems[i];
+    html += '<li class="versus_item"><input type="button" data-id="' + versusItem._id  + '" value="' + versusItem.name + '"></li>';
+  }
+
+  jQuery('ul.versus').html(html);
+};
+
+
 Meteor.subscribe('items', function() {
   console.log ("Subscription READY");
-
-  var buttonsFragment = Meteor.render(function () {
-    var itemsCount = Items.find().count();
-    var firstItemPosition = CR.getRandomInt(0, itemsCount);
-    var secondItemPosition = CR.getRandomInt(0, itemsCount);
-
-    while (secondItemPosition === firstItemPosition) {
-      secondItemPosition = CR.getRandomInt(0, itemsCount);
-    }
-
-    var firstItem = Items.findOne({}, {skip: firstItemPosition});
-    var secondItem = Items.findOne({}, {skip: secondItemPosition});
-
-    var versusItems = [firstItem, secondItem];
-
-    var html = "";
-
-    for (var i = 0; i < versusItems.length; i++) {
-      var versusItem = versusItems[i];
-      html += '<li class="versus_item"><input type="button" data-id="' + versusItem._id  + '" value="' + versusItem.name + '"></li>';
-    }
-
-    return html;
-  });
-
-  jQuery('ul.versus').html(buttonsFragment);
-
+  refreshButtons();
 });
 
 Template.leaderboard.items = function () {
@@ -51,6 +54,8 @@ Template.fight.events({
 
     Items.update(winnerId, {$set: {score: winnerItemNewScore}, $inc: {gamesCount: 1}});
     Items.update(loserId, {$set: {score: loserItemNewScore}, $inc: {gamesCount: 1}});
+
+    refreshButtons();
 
     // NAIVE RATING
     //Items.update(target.data('id'), {$inc: {score: 1}})
