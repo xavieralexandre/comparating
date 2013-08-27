@@ -1,0 +1,3 @@
+(function(){Template.__define__("admin",Package.handlebars.Handlebars.json_ast_to_func(["<div class=\"container\">\n    <h2>Admin</h2>\n    <div class=\"row form-group\">\n      <div class=\"col-md-6 col-md-offset-3\">\n        <button id=\"reset\" type=\"button\" class=\"btn btn-danger btn-lg btn-block\">Reset with sample data</button>\n      </div>\n    </div>\n    <div class=\"row form-group\">\n      <div class=\"col-md-6 col-md-offset-3\">\n        <button id=\"import_from_csv\" type=\"button\" class=\"btn btn-danger btn-lg btn-block\">Import assets from Dropbox</button>\n      </div>\n    </div>\n  </div>"]));
+
+})();
